@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Multi-chart page — D3</title>
+  <style>
+    /* Reset + base styles */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, sans-serif;
+      background: #f7f7f7;
+      color: #222;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      background: #004477;
+      color: white;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    .intro {
+      max-width: 800px;
+      margin: 1.5rem auto;
+      padding: 0 1rem;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #444;
+    }
+
+    main.grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 1.5rem;
+      padding: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Medium screens → 2 charts per row */
+    @media (max-width: 900px) {
+      main.grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      }
+    }
+
+    /* Small screens / minimized window → 1 chart per row */
+    @media (max-width: 600px) {
+      main.grid {
+        grid-template-columns: 1fr;
+      }
+      .chart-body {
+        min-height: 220px; /* shorter on mobile */
+      }
+    }
+
+    .chart {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chart h2 {
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+      color: #333;
+      text-align: center;
+    }
+
+    .chart-body {
+      flex: 1;
+      min-height: 300px; /* gives charts breathing room */
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between; 
+      align-items: center;
+      padding: 1rem;
+      background: #004477;
+      color: white;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>TV energy visualisations (Multi-chart)</h1>
+    <p>Scatter · Donut · Bar · Line</p>
+  </header>
+
+  <div class="intro">
+    <p>
+      This dashboard presents multiple visualisations based on TV energy data. 
+      You can explore how star ratings relate to energy consumption, 
+      compare technologies using a donut chart, analyse energy for 55-inch TVs, 
+      and observe historical spot power prices from 1998–2024. 
+      Resize the window to see how the charts adapt responsively.
+    </p>
+  </div>
+
+  <main class="grid">
+    <section id="scatter" class="chart" aria-labelledby="scatter-title">
+      <h2 id="scatter-title">Scatter — Energy (kWh) vs Star Rating</h2>
+      <div class="chart-body"></div>
+    </section>
+
+    <section id="donut" class="chart" aria-labelledby="donut-title">
+      <h2 id="donut-title">Donut — Energy by Screen Technology (all TVs)</h2>
+      <div class="chart-body"></div>
+    </section>
+
+    <section id="bar" class="chart" aria-labelledby="bar-title">
+      <h2 id="bar-title">Bar — Energy for 55&quot; TVs by Screen Technology</h2>
+      <div class="chart-body"></div>
+    </section>
+
+    <section id="line" class="chart" aria-labelledby="line-title">
+      <h2 id="line-title">Line — Spot Power Prices (1998–2024)</h2>
+      <div class="chart-body"></div>
+    </section>
+  </main>
+
+  <footer>
+    <span>&copy; 2025 Elaine Ho Yung Hui</span>
+    <span>Built with assistance from GenAI for starter code/content</span>
+  </footer>
+
+  <!-- D3 -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+
+  <!-- Chart scripts (each file self-contained) -->
+  <script src="js/scatter.js"></script>
+  <script src="js/donut.js"></script>
+  <script src="js/bar.js"></script>
+  <script src="js/line.js"></script>
+</body>
+</html>
